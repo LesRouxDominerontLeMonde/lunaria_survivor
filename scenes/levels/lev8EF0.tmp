@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvy55wmuclo8g"]
+
+[ext_resource type="PackedScene" uid="uid://buk5st1w1g72j" path="res://scenes/levels/level.tscn" id="1_7hpud"]
+[ext_resource type="Script" path="res://scenes/levels/level_1.gd" id="2_xbyyt"]
+[ext_resource type="Texture2D" uid="uid://byynct1tw1aic" path="res://graphics/backgrounds/ancientForest.png" id="3_168pc"]
+[ext_resource type="PackedScene" uid="uid://doensa8y0ew6c" path="res://scenes/objects/stones/medium_stones.tscn" id="4_n1qks"]
+
+[node name="Level 1" instance=ExtResource("1_7hpud")]
+script = ExtResource("2_xbyyt")
+
+[node name="Player" parent="." index="0"]
+position = Vector2(1, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="1"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+motion_mirroring = Vector2(1224, 1224)
+metadata/_edit_lock_ = true
+
+[node name="AncientForest" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" index="0"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_168pc")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="medium_stone2" parent="." index="2" instance=ExtResource("4_n1qks")]
+position = Vector2(63, 35)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj1ygiitvjskx"]
+
+[ext_resource type="Texture2D" uid="uid://byd7s8x8l0uvm" path="res://graphics/UI/player_ui/bar_background.png" id="1_3shek"]
+[ext_resource type="Texture2D" uid="uid://blyin5hjfxhva" path="res://graphics/UI/player_ui/bar_fill.png" id="2_tfl6q"]
+[ext_resource type="Script" path="res://scenes/UI/xp_bar.gd" id="3_430hb"]
+
+[node name="xp_bar" type="TextureProgressBar"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -34.5
+offset_right = 861.0
+offset_bottom = 34.5
+grow_vertical = 2
+size_flags_horizontal = 4
+value = 80.0
+texture_under = ExtResource("1_3shek")
+texture_progress = ExtResource("2_tfl6q")
+script = ExtResource("3_430hb")
