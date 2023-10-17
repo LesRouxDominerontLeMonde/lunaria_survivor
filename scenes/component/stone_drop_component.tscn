@@ -3,6 +3,6 @@
 [ext_resource type="Script" path="res://scenes/component/stone_drop_component.gd" id="1_lrood"]
 [ext_resource type="PackedScene" uid="uid://doensa8y0ew6c" path="res://scenes/objects/stones/medium_stones.tscn" id="2_qkj24"]
 
-[node name="stone_drop_component" type="Node"]
+[node name="StoneDropComponent" type="Node"]
 script = ExtResource("1_lrood")
 stone_scene = ExtResource("2_qkj24")

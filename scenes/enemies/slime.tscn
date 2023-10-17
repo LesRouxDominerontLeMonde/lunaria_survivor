@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://crx1gagvf62kq"]
+[gd_scene load_steps=12 format=3 uid="uid://crx1gagvf62kq"]
 
 [ext_resource type="Texture2D" uid="uid://da58yvo1ehw0s" path="res://graphics/enemies/slime/Individual Sprites/slime-move-0.png" id="1_0p0ad"]
 [ext_resource type="Script" path="res://scenes/enemies/slime.gd" id="1_lvd22"]
@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cbtswydldqn8q" path="res://graphics/enemies/slime/Individual Sprites/slime-move-2.png" id="3_0bmdf"]
 [ext_resource type="PackedScene" uid="uid://bd03jkywqv85c" path="res://scenes/component/stone_drop_component.tscn" id="3_cul0f"]
 [ext_resource type="Texture2D" uid="uid://cpgxyy400qycg" path="res://graphics/enemies/slime/Individual Sprites/slime-move-3.png" id="4_d0j5c"]
+[ext_resource type="PackedScene" uid="uid://c7e6ti605ljmu" path="res://scenes/component/hurt_box_component.tscn" id="4_m8lum"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a4qu3"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_77oty"]
 radius = 9.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jmd4n"]
@@ -42,17 +43,17 @@ motion_mode = 1
 script = ExtResource("1_lvd22")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_ynxe7")]
+max_health = 10.0
 
 [node name="stone_drop_component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_cul0f")]
 health_component = NodePath("../HealthComponent")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 8
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_m8lum")]
+health_component = NodePath("../HealthComponent")
 
-[node name="HitBox" type="CollisionShape2D" parent="Area2D"]
+[node name="HurtBox" type="CollisionShape2D" parent="HurtBoxComponent"]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_a4qu3")
+shape = SubResource("CapsuleShape2D_77oty")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
