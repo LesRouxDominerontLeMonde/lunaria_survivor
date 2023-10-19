@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scenes/manager/experience_manager.gd" id="1_v8rlm"]
 
-[node name="experience_manager" type="Node"]
+[node name="ExperienceManager" type="Node"]
 script = ExtResource("1_v8rlm")

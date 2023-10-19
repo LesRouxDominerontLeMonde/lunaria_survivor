@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyb6gdjth3ny6"]
+
+[ext_resource type="Script" path="res://scenes/UI/ability_upgrade_card.gd" id="1_n3nuo"]
+
+[node name="AbilityUpgradeCard" type="PanelContainer"]
+custom_minimum_size = Vector2(120, 140)
+script = ExtResource("1_n3nuo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Test Name"
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Augment the damage by 1°%"
+autowrap_mode = 2
