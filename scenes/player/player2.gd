@@ -1,50 +1,53 @@
 extends CharacterBody2D
 
-signal experience_gained(growth_data)
-# CHARACTER STATS
+@onready var damage_interval_timer = $DamageIntervalTimer
+@onready var health_component = $HealthComponent
+@onready var health_bar = $HealthBar
+
 var player_speed = 200
-var max_hp: int = 12
+var number_coliding_body = 0
 
-# LEVELING SYSTEM
-var player_level = 1
-var experience = 0
-var experience_total = 0
-var experience_required = get_required_experience(player_level + 1)
-
-#OTHERS
-var stones: int = 0
-
+func _ready():
+	$HurtArea2D.body_entered.connect(on_body_entered)
+	$HurtArea2D.body_exited.connect(on_body_exited)
+	# Check in case an enemy is still present after 0.5s timer
+	damage_interval_timer.timeout.connect(on_damage_interval_timer_timeout)
+	health_component.health_changed.connect(on_health_changed)
 	
+	update_health_display()
+
+
 func _process(_delta):
 	var direction = Input.get_vector("left","right","up","down")
 	velocity = direction * player_speed
 	move_and_slide()
 	Globals.player_pos = global_position
-	
-func add_stone():
-	stones += 1
-	print("stone number:", stones)
-	gain_experience(50)
-	print("experience % =", experience*100/experience_required)
-	print("experience_required", experience_required)
-	
-func get_required_experience(level):
-	return round(pow(level, 1.8) + level * 4 + 5)
 
-func gain_experience(amount):
-	experience_total += amount
-	experience += amount
-	var growth_data = [] # var to send value to UI anim bar
-	while experience >= experience_required:
-		experience -= experience_required
-		# stack line in var to Fill the entire xp barin UI
-		growth_data.append([experience_required, experience_required])
-		level_up()
-	# Fill just a portion of the xp bar
-	growth_data.append([experience, experience_required])
-	emit_signal("experience_gained", growth_data)
-	
-func level_up():
-	player_level += 1
-	experience_required = get_required_experience(player_level + 1)
-	
+
+func check_deal_damage():
+	if number_coliding_body == 0 || !damage_interval_timer.is_stopped():
+		return
+	health_component.damage(10)
+	damage_interval_timer.start()
+	print(health_component.current_health)
+
+
+func update_health_display():
+	health_bar.value = health_component.get_health_percent()
+
+
+func on_body_entered(_other_body: Node2D):
+	number_coliding_body += 1
+	check_deal_damage()
+
+
+func on_body_exited(_other_body: Node2D):
+	number_coliding_body -= 1
+
+
+func on_damage_interval_timer_timeout():
+	check_deal_damage()
+
+
+func on_health_changed():
+	update_health_display()

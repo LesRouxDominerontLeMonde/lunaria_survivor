@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dg76px46ld7rr"]
+[gd_scene load_steps=3 format=3 uid="uid://dg76px46ld7rr"]
 
-[ext_resource type="Script" path="res://scenes/UI/upgrade_scene.gd" id="1_s48lx"]
+[ext_resource type="Script" path="res://scenes/UI/upgrade_screen.gd" id="1_xbl6m"]
+[ext_resource type="PackedScene" uid="uid://dyb6gdjth3ny6" path="res://scenes/UI/ability_upgrade_card.tscn" id="2_g08nu"]
 
-[node name="UpgradeScene" type="CanvasLayer"]
-script = ExtResource("1_s48lx")
+[node name="UpgradeScreen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_xbl6m")
+upgrade_card_scene = ExtResource("2_g08nu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

@@ -40,4 +40,9 @@ experience_manager = NodePath("../experience_manager")
 [node name="medium_stone" parent="." instance=ExtResource("3_h0i2h")]
 position = Vector2(62, 18)
 
-[node name="player2" parent="." instance=ExtResource("7_j3ebf")]
+[node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
+y_sort_enabled = true
+
+[node name="player2" parent="Entities" instance=ExtResource("7_j3ebf")]
+
+[node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
