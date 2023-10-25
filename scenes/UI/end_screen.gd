@@ -7,8 +7,9 @@ func _ready():
 	$%QuitButton.pressed.connect(on_quit_button_pressed)
 
 
-func _process(delta):
-	pass
+func set_defeat():
+	$%TitleLabel.text = 'Defeat'
+	$%DescriptionLabel.text = 'You lost !'
 
 
 func on_restart_button_pressed():

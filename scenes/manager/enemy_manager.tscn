@@ -8,4 +8,5 @@ script = ExtResource("1_4v8hv")
 slime_scene = ExtResource("2_fnncj")
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 autostart = true

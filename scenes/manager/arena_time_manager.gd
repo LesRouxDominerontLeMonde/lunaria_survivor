@@ -1,11 +1,24 @@
 extends Node
 
-@export var victory_screen_scene: PackedScene
+const DIFICULTY_INTERVAL = 5
+
+signal arena_dificulty_increased(arena_dificulty: int)
+
+@export var end_screen_scene: PackedScene
 
 @onready var timer = $Timer
 
+var arena_dificulty = 0
+
 func _ready():
 	timer.timeout.connect(on_timer_timeout)
+
+
+func _process(_delta):
+	var next_time_target = timer.wait_time - ((arena_dificulty + 1) * DIFICULTY_INTERVAL)
+	if timer.time_left <= next_time_target:
+		arena_dificulty += 1
+		arena_dificulty_increased.emit(arena_dificulty)
 
 
 func get_time_elapsed():
@@ -14,5 +27,5 @@ func get_time_elapsed():
 
 
 func on_timer_timeout():
-	var victory_screen_instance = victory_screen_scene.instantiate()
-	add_child(victory_screen_instance)
+	var end_screen_instance = end_screen_scene.instantiate()
+	add_child(end_screen_instance)
