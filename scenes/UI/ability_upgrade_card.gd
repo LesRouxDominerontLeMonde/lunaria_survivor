@@ -6,8 +6,8 @@ signal selected
 @onready var description_label = $%DescriptionLabel
 
 func set_ability_upgrade(upgrade: AbilityUpgrade):
-	name_label = upgrade.name
-	description_label = upgrade.description
+	name_label.text = upgrade.name
+	description_label.text = upgrade.description
 
 
 func _on_gui_input(event: InputEvent):

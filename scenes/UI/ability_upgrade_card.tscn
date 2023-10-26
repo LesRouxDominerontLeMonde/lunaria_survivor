@@ -17,7 +17,6 @@ text = "Test Name"
 [node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Augment the damage by 1°%"
 autowrap_mode = 2
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

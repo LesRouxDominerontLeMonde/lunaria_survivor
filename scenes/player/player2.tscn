@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://broudi2gctjxm"]
+[gd_scene load_steps=13 format=3 uid="uid://broudi2gctjxm"]
 
 [ext_resource type="Texture2D" uid="uid://ce43cccj1hiex" path="res://graphics/player/witch_run.png" id="1_f2o68"]
 [ext_resource type="Script" path="res://scenes/player/player2.gd" id="1_r7xd4"]
 [ext_resource type="PackedScene" uid="uid://2kr5gxm0f8ie" path="res://scenes/ability/sword_ability_controller/SwordAbilityController.tscn" id="3_51004"]
 [ext_resource type="PackedScene" uid="uid://cl11hb3y4mh37" path="res://scenes/component/health_component.tscn" id="3_qilif"]
-[ext_resource type="PackedScene" uid="uid://b40l7hvqrn2r8" path="res://scenes/ability/axe_ability_controller/axe_ability_controller.tscn" id="4_st4m3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34hml"]
 bg_color = Color(0.247059, 0.14902, 0.192157, 1)
@@ -75,8 +74,6 @@ script = ExtResource("1_r7xd4")
 [node name="AbilityManager" type="Node" parent="."]
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("3_51004")]
-
-[node name="AxeAbilityController" parent="AbilityManager" instance=ExtResource("4_st4m3")]
 
 [node name="DamageIntervalTimer" type="Timer" parent="."]
 wait_time = 0.5
