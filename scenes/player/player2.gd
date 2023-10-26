@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var damage_interval_timer = $DamageIntervalTimer
 @onready var health_component = $HealthComponent
 @onready var health_bar = $HealthBar
+@onready var abilities = $Abilities
 
 var player_speed = 200
 var number_coliding_body = 0
@@ -13,6 +14,7 @@ func _ready():
 	# Check in case an enemy is still present after 0.5s timer
 	damage_interval_timer.timeout.connect(on_damage_interval_timer_timeout)
 	health_component.health_changed.connect(on_health_changed)
+	Globals.ability_upgrade_added.connect(on_ability_upgrade_added)
 	
 	update_health_display()
 
@@ -51,3 +53,10 @@ func on_damage_interval_timer_timeout():
 
 func on_health_changed():
 	update_health_display()
+
+
+func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	if not upgrade is Ability: #Si upgrade n'est pas de type Ability: return
+		return
+	var upgrade_ability = upgrade as Ability
+	abilities.add_child(upgrade_ability.ability_controller_scene.instantiate())
