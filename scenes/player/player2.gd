@@ -4,9 +4,11 @@ extends CharacterBody2D
 @onready var health_component = $HealthComponent
 @onready var health_bar = $HealthBar
 @onready var abilities = $Abilities
+@onready var animation_player = $AnimationPlayer
 
 var player_speed = 200
 var number_coliding_body = 0
+var reverse: bool = false
 
 func _ready():
 	$HurtArea2D.body_entered.connect(on_body_entered)
@@ -23,6 +25,15 @@ func _process(_delta):
 	var direction = Input.get_vector("left","right","up","down")
 	velocity = direction * player_speed
 	move_and_slide()
+	if direction == Vector2.ZERO:
+		animation_player.play('RESET')
+	else:
+		animation_player.play("run")
+		
+	if Input.is_action_pressed("left"):
+		$Sprite2D.scale = Vector2(-1, 1)
+	if Input.is_action_pressed("right"):
+		$Sprite2D.scale = Vector2.ONE
 	Globals.player_pos = global_position
 
 
@@ -55,7 +66,7 @@ func on_health_changed():
 	update_health_display()
 
 
-func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+func on_ability_upgrade_added(upgrade: AbilityUpgrade, _current_upgrades: Dictionary):
 	if not upgrade is Ability: #Si upgrade n'est pas de type Ability: return
 		return
 	var upgrade_ability = upgrade as Ability

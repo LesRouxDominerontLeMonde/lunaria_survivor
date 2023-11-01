@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://crx1gagvf62kq"]
+[gd_scene load_steps=12 format=3 uid="uid://crx1gagvf62kq"]
 
 [ext_resource type="Texture2D" uid="uid://da58yvo1ehw0s" path="res://graphics/enemies/slime/Individual Sprites/slime-move-0.png" id="1_0p0ad"]
 [ext_resource type="Script" path="res://scenes/enemies/slime.gd" id="1_lvd22"]
 [ext_resource type="Texture2D" uid="uid://dgcorj4t2l08" path="res://graphics/enemies/slime/Individual Sprites/slime-move-1.png" id="2_ot1ne"]
 [ext_resource type="PackedScene" uid="uid://cl11hb3y4mh37" path="res://scenes/component/health_component.tscn" id="2_ynxe7"]
 [ext_resource type="Texture2D" uid="uid://cbtswydldqn8q" path="res://graphics/enemies/slime/Individual Sprites/slime-move-2.png" id="3_0bmdf"]
-[ext_resource type="PackedScene" uid="uid://dn47sfyry6qi3" path="res://scenes/component/velocity_component.tscn" id="3_0qccl"]
 [ext_resource type="PackedScene" uid="uid://bd03jkywqv85c" path="res://scenes/component/stone_drop_component.tscn" id="3_cul0f"]
 [ext_resource type="Texture2D" uid="uid://cpgxyy400qycg" path="res://graphics/enemies/slime/Individual Sprites/slime-move-3.png" id="4_d0j5c"]
 [ext_resource type="PackedScene" uid="uid://c7e6ti605ljmu" path="res://scenes/component/hurt_box_component.tscn" id="4_m8lum"]
@@ -37,7 +36,7 @@ animations = [{
 radius = 5.0
 height = 22.0
 
-[node name="slime" type="CharacterBody2D" groups=["enemy"]]
+[node name="slime" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 17
 motion_mode = 1
@@ -45,10 +44,6 @@ script = ExtResource("1_lvd22")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_ynxe7")]
 max_health = 10.0
-
-[node name="VelocityComponent" parent="." instance=ExtResource("3_0qccl")]
-max_speed = 100
-acceleration = 5.0
 
 [node name="stone_drop_component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_cul0f")]
 health_component = NodePath("../HealthComponent")
@@ -62,7 +57,7 @@ shape = SubResource("CapsuleShape2D_77oty")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemy"]]
 position = Vector2(1, -6)
 sprite_frames = SubResource("SpriteFrames_jmd4n")
 animation = &"move"

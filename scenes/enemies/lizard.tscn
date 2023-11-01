@@ -1,0 +1,92 @@
+[gd_scene load_steps=17 format=3 uid="uid://s286pxqio6mb"]
+
+[ext_resource type="Texture2D" uid="uid://d33g8y38r2ic0" path="res://graphics/enemies/lizard/lizard/Idle1.png" id="1_i1tuv"]
+[ext_resource type="Script" path="res://scenes/enemies/lizard.gd" id="1_vtlrq"]
+[ext_resource type="Texture2D" uid="uid://e7j52lhwjrhx" path="res://graphics/enemies/lizard/lizard/Idle2.png" id="2_eup50"]
+[ext_resource type="Texture2D" uid="uid://b5txevismyrdr" path="res://graphics/enemies/lizard/lizard/Idle3.png" id="3_yknhq"]
+[ext_resource type="Texture2D" uid="uid://bnuqqyt8xq5sm" path="res://graphics/enemies/lizard/lizard/Walk1.png" id="4_sowwf"]
+[ext_resource type="Texture2D" uid="uid://sdx7cg8enqrd" path="res://graphics/enemies/lizard/lizard/Walk2.png" id="5_633cb"]
+[ext_resource type="Texture2D" uid="uid://fx3jl7u540tg" path="res://graphics/enemies/lizard/lizard/Walk3.png" id="6_mvhmp"]
+[ext_resource type="Texture2D" uid="uid://c5660iggfu1co" path="res://graphics/enemies/lizard/lizard/Walk4.png" id="7_fn58r"]
+[ext_resource type="Texture2D" uid="uid://sjn82rjk5m5" path="res://graphics/enemies/lizard/lizard/Walk5.png" id="8_b4veu"]
+[ext_resource type="Texture2D" uid="uid://fec0kq6i43si" path="res://graphics/enemies/lizard/lizard/Walk6.png" id="9_r1x5c"]
+[ext_resource type="PackedScene" uid="uid://cl11hb3y4mh37" path="res://scenes/component/health_component.tscn" id="10_cfkrh"]
+[ext_resource type="PackedScene" uid="uid://c7e6ti605ljmu" path="res://scenes/component/hurt_box_component.tscn" id="11_y28n7"]
+[ext_resource type="PackedScene" uid="uid://dn47sfyry6qi3" path="res://scenes/component/velocity_component.tscn" id="12_xoxl8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_233im"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_i1tuv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_eup50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yknhq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sowwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_633cb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mvhmp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fn58r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b4veu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r1x5c")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4kwb3"]
+radius = 19.1909
+height = 55.439
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d18g6"]
+radius = 14.0357
+
+[node name="Lizard" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 16
+collision_mask = 17
+script = ExtResource("1_vtlrq")
+
+[node name="HealthComponent" parent="." instance=ExtResource("10_cfkrh")]
+max_health = 30.0
+
+[node name="VelocityComponent" parent="." instance=ExtResource("12_xoxl8")]
+max_speed = 50
+acceleration = 2.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_233im")
+animation = &"walk"
+frame_progress = 0.580614
+offset = Vector2(8, -30)
+
+[node name="HurtBoxComponent" parent="." instance=ExtResource("11_y28n7")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(-7, -26)
+rotation = 0.418879
+shape = SubResource("CapsuleShape2D_4kwb3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, -24)
+shape = SubResource("CircleShape2D_d18g6")

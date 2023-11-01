@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://jes3m25g6h43"]
 
 [ext_resource type="Script" path="res://scenes/manager/enemy_manager.gd" id="1_4v8hv"]
-[ext_resource type="PackedScene" uid="uid://crx1gagvf62kq" path="res://scenes/enemies/slime.tscn" id="2_fnncj"]
+[ext_resource type="PackedScene" uid="uid://s286pxqio6mb" path="res://scenes/enemies/lizard.tscn" id="2_msd5p"]
 
 [node name="EnemyManager" type="Node"]
 script = ExtResource("1_4v8hv")
-slime_scene = ExtResource("2_fnncj")
+slime_scene = ExtResource("2_msd5p")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

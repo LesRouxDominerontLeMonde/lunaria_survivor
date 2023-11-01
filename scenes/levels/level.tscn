@@ -26,7 +26,6 @@ visible = false
 experience_manager = NodePath("../../experience_manager")
 
 [node name="xp_bar" parent="Interface" instance=ExtResource("4_wibn7")]
-visible = false
 offset_top = 13.0
 offset_bottom = 82.0
 
