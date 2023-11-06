@@ -70,6 +70,7 @@ collision_mask = 16
 script = ExtResource("1_r7xd4")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_qilif")]
+max_health = 1e+07
 
 [node name="Abilities" type="Node" parent="."]
 

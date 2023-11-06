@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://s286pxqio6mb"]
+[gd_scene load_steps=18 format=3 uid="uid://s286pxqio6mb"]
 
 [ext_resource type="Texture2D" uid="uid://d33g8y38r2ic0" path="res://graphics/enemies/lizard/lizard/Idle1.png" id="1_i1tuv"]
 [ext_resource type="Script" path="res://scenes/enemies/lizard.gd" id="1_vtlrq"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cl11hb3y4mh37" path="res://scenes/component/health_component.tscn" id="10_cfkrh"]
 [ext_resource type="PackedScene" uid="uid://c7e6ti605ljmu" path="res://scenes/component/hurt_box_component.tscn" id="11_y28n7"]
 [ext_resource type="PackedScene" uid="uid://dn47sfyry6qi3" path="res://scenes/component/velocity_component.tscn" id="12_xoxl8"]
+[ext_resource type="PackedScene" uid="uid://bd03jkywqv85c" path="res://scenes/component/stone_drop_component.tscn" id="14_qjcof"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_233im"]
 animations = [{
@@ -61,7 +62,7 @@ height = 55.439
 [sub_resource type="CircleShape2D" id="CircleShape2D_d18g6"]
 radius = 14.0357
 
-[node name="Lizard" type="CharacterBody2D"]
+[node name="Lizard" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.5, 0.5)
 collision_layer = 16
 collision_mask = 17
@@ -70,17 +71,24 @@ script = ExtResource("1_vtlrq")
 [node name="HealthComponent" parent="." instance=ExtResource("10_cfkrh")]
 max_health = 30.0
 
+[node name="StoneDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("14_qjcof")]
+drop_percent = 1.0
+health_component = NodePath("../HealthComponent")
+
 [node name="VelocityComponent" parent="." instance=ExtResource("12_xoxl8")]
-max_speed = 50
-acceleration = 2.0
+max_speed = 80
+acceleration = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_233im")
 animation = &"walk"
-frame_progress = 0.580614
+autoplay = "walk"
+frame_progress = 0.281217
 offset = Vector2(8, -30)
 
-[node name="HurtBoxComponent" parent="." instance=ExtResource("11_y28n7")]
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_y28n7")]
+visible = false
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(-7, -26)
@@ -88,5 +96,6 @@ rotation = 0.418879
 shape = SubResource("CapsuleShape2D_4kwb3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-6, -24)
 shape = SubResource("CircleShape2D_d18g6")
